@@ -13,5 +13,9 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && make \
   && ld -L/var/task/lib -llapack -shared -o /var/task/lib/liblevmar.so --whole-archive liblevmar.a
 
+RUN set -x \
+  && yum install -y epel-release \
+  && yum --enablerepo=epel install -y haskell-platform
+
 RUN rm -rf ~/tmp \
   && echo "Build Complete: Version 1.0.0"
