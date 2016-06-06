@@ -14,7 +14,7 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && ld -L/var/task/lib -llapack -shared -o /var/task/lib/liblevmar.so --whole-archive liblevmar.a
 
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
-  && curl -L https://downloads.haskell.org/~platform/8.0.1/haskell-platform-8.0.1-unknown-posix--full-x86_64.tar.gz | tar -zxf - \
+  && curl -L https://downloads.haskell.org/~platform/7.10.3/haskell-platform-7.10.3-unknown-posix-x86_64.tar.gz | tar -zxf - \
   && ./install-haskell-platform.sh
 
 RUN rm -rf ~/tmp \
