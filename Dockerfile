@@ -13,9 +13,10 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && make \
   && ld -L/var/task/lib -llapack -shared -o /var/task/lib/liblevmar.so --whole-archive liblevmar.a
 
-RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
-  && curl -L https://downloads.haskell.org/~platform/7.10.3/haskell-platform-7.10.3-unknown-posix-x86_64.tar.gz | tar -zxf - \
-  && ./install-haskell-platform.sh
+RUN set -x && cd /etc/yum.repos.d \
+  && curl -sSLO https://s3.amazonaws.com/download.fpcomplete.com/centos/7/fpco.repo \
+  && yum install -y stack \
+  && stack setup
 
 RUN rm -rf ~/tmp \
   && echo "Build Complete: Version 1.1.0"
