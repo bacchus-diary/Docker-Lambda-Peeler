@@ -18,4 +18,4 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && ./install-haskell-platform.sh
 
 RUN rm -rf ~/tmp \
-  && echo "Build Complete: Version 1.0.0"
+  && echo "Build Complete: Version 1.1.0"
