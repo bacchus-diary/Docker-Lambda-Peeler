@@ -1,4 +1,4 @@
-FROM fathens/docker-lambda-opencv24
+FROM fathens/docker-lambda-opencv:latest_opencv
 
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && curl -L http://www.netlib.org/lapack/lapack-3.6.0.tgz | tar -zxf - && cd lapack-* \
