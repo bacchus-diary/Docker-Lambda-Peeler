@@ -15,8 +15,7 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
 
 RUN set -x && cd /etc/yum.repos.d \
   && curl -sSLO https://s3.amazonaws.com/download.fpcomplete.com/centos/7/fpco.repo \
-  && yum install -y stack \
-  && stack setup
+  && yum install -y stack
 
 RUN rm -rf ~/tmp \
   && echo "Build Complete: Version 1.1.0"
