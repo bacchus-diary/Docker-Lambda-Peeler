@@ -18,7 +18,7 @@ RUN set -x && cd /etc/yum.repos.d \
   && yum install -y stack
 
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
-  && curl -L https://github.com/NixOS/patchelf/archive/0.9.tar.gz | tar -zxf - && cd patchelf-* \
+  && curl -L http://nixos.org/releases/patchelf/patchelf-0.9/patchelf-0.9.tar.bz2 | tar -jxf - && cd patchelf-* \
   && ./configure \
   && make all && make install
 
