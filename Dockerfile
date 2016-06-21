@@ -1,4 +1,4 @@
-FROM fathens/docker-lambda-opencv:latest_opencv
+FROM fathens/docker-lambda-opencv
 
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && curl -L http://www.netlib.org/lapack/lapack-3.6.0.tgz | tar -zxf - && cd lapack-* \
@@ -23,4 +23,4 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && make all && make install
 
 RUN rm -rf ~/tmp \
-  && echo "Build Complete: Version 1.1.0"
+  && echo "Build Complete: Version 1.2.0"
