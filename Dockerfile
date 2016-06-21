@@ -1,4 +1,4 @@
-FROM fathens/docker-lambda-opencv24
+FROM fathens/docker-lambda-opencv:latest_opencv
 
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && curl -L http://www.netlib.org/lapack/lapack-3.6.0.tgz | tar -zxf - && cd lapack-* \
@@ -13,9 +13,14 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && make \
   && ld -L/var/task/lib -llapack -shared -o /var/task/lib/liblevmar.so --whole-archive liblevmar.a
 
+RUN set -x && cd /etc/yum.repos.d \
+  && curl -sSLO https://s3.amazonaws.com/download.fpcomplete.com/centos/7/fpco.repo \
+  && yum install -y stack
+
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
-  && curl -L https://downloads.haskell.org/~platform/8.0.1/haskell-platform-8.0.1-unknown-posix--full-x86_64.tar.gz | tar -zxf - \
-  && ./install-haskell-platform.sh
+  && curl -L http://nixos.org/releases/patchelf/patchelf-0.9/patchelf-0.9.tar.bz2 | tar -jxf - && cd patchelf-* \
+  && ./configure \
+  && make all && make install
 
 RUN rm -rf ~/tmp \
   && echo "Build Complete: Version 1.1.0"
