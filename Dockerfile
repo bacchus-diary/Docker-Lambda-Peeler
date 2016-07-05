@@ -11,7 +11,8 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && mkdir build && cd build \
   && cmake -D CMAKE_BUILD_TYPE=RELEASE -D BUILD_DEMO=NO -D CMAKE_C_FLAGS=-fPIC ../ \
   && make \
-  && ld -L/var/task/lib -llapack -shared -o /var/task/lib/liblevmar.so --whole-archive liblevmar.a
+  && ld -L/var/task/lib -llapack -shared -o /var/task/lib/liblevmar.so --whole-archive liblevmar.a \
+  && cp -vu ../levmar.h /var/task/include/
 
 RUN set -x && cd /etc/yum.repos.d \
   && curl -sSLO https://s3.amazonaws.com/download.fpcomplete.com/centos/7/fpco.repo \
