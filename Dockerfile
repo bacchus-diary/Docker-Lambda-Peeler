@@ -14,6 +14,12 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && ld -L/var/task/lib -llapack -shared -o /var/task/lib/liblevmar.so --whole-archive liblevmar.a \
   && cp -vu ../levmar.h /var/task/include/
 
+RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
+  && curl -L https://github.com/CGAL/cgal/releases/download/releases%2FCGAL-4.8.1/CGAL-4.8.1.zip | bsdtar -xf- && cd CGAL-* \
+  && mkdir build && cd build \
+  && cmake -D CMAKE_BUILD_TYPE=Release -D BUILD_SHARED_LIBS=ON -D CMAKE_INSTALL_PREFIX=/var/task -D CMAKE_INSTALL_LIBDIR=lib ../ \
+  && make install
+
 RUN set -x && cd /etc/yum.repos.d \
   && curl -sSLO https://s3.amazonaws.com/download.fpcomplete.com/centos/7/fpco.repo \
   && yum install -y stack
