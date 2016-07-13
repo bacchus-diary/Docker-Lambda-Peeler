@@ -15,6 +15,13 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && cp -vu ../levmar.h /var/task/include/
 
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
+  && curl -L http://www.mpfr.org/mpfr-current/mpfr-3.1.4.tar.bz2 | tar -jxf - && cd mpfr-* \
+  && curl http://www.mpfr.org/mpfr-3.1.4/allpatches | patch -N -Z -p1 \
+  && ./configure --prefix=/var/task \
+  && make \
+  && make check && make install
+
+RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && curl -L https://github.com/CGAL/cgal/releases/download/releases%2FCGAL-4.8.1/CGAL-4.8.1.zip | bsdtar -xf- && cd CGAL-* \
   && mkdir build && cd build \
   && cmake -D CMAKE_BUILD_TYPE=Release -D BUILD_SHARED_LIBS=ON -D CMAKE_INSTALL_PREFIX=/var/task -D CMAKE_INSTALL_LIBDIR=lib ../ \
