@@ -15,6 +15,11 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && cp -vu ../levmar.h /var/task/include/
 
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
+  && curl -L http://downloads.sourceforge.net/project/boost/boost/1.61.0/boost_1_61_0.tar.bz2?r=&ts=1468397054&use_mirror=ufpr | tar -jxf - && cd boost* \
+  && ./bootstrap.sh --prefix=/var/task \
+  && ./b2 install
+
+RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && curl -L http://www.mpfr.org/mpfr-current/mpfr-3.1.4.tar.bz2 | tar -jxf - && cd mpfr-* \
   && curl http://www.mpfr.org/mpfr-3.1.4/allpatches | patch -N -Z -p1 \
   && ./configure --prefix=/var/task \
