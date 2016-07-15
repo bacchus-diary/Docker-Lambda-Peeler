@@ -15,15 +15,21 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && cp -vu ../levmar.h /var/task/include/
 
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
-  && curl -L http://downloads.sourceforge.net/project/boost/boost/1.61.0/boost_1_61_0.tar.bz2?r=&ts=1468397054&use_mirror=ufpr | tar -jxf - && cd boost* \
+  && curl -L 'http://downloads.sourceforge.net/project/boost/boost/1.61.0/boost_1_61_0.tar.bz2?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fboost%2Ffiles%2Fboost%2F1.61.0%2F&ts=1468569229&use_mirror=ufpr' | tar -jxf - && cd boost_* \
   && ./bootstrap.sh --prefix=/var/task \
-  && ./b2 install
+  && ./b2 install -j2
+
+RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
+  && curl -L https://gmplib.org/download/gmp/gmp-6.1.1.tar.bz2 | tar -jxf - && cd gmp-* \
+  && ./configure --prefix=/var/task \
+  && make -j2 \
+  && make check && make install
 
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && curl -L http://www.mpfr.org/mpfr-current/mpfr-3.1.4.tar.bz2 | tar -jxf - && cd mpfr-* \
   && curl http://www.mpfr.org/mpfr-3.1.4/allpatches | patch -N -Z -p1 \
   && ./configure --prefix=/var/task \
-  && make \
+  && make -j2 \
   && make check && make install
 
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
