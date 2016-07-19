@@ -15,7 +15,7 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && cp -vu ../levmar.h /var/task/include/
 
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
-  && curl -L 'http://downloads.sourceforge.net/project/boost/boost/1.61.0/boost_1_61_0.tar.bz2?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fboost%2Ffiles%2Fboost%2F1.61.0%2F&ts=1468569229&use_mirror=ufpr' | tar -jxf - && cd boost_* \
+  && curl -L http://downloads.sourceforge.net/project/boost/boost/1.61.0/boost_1_61_0.tar.bz2 | tar -jxf - && cd boost_* \
   && ./bootstrap.sh \
   && ./b2 install link=shared --prefix=/var/task --without-python -j2
 
