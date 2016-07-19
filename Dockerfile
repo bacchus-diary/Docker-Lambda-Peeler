@@ -36,7 +36,7 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && curl -L https://github.com/CGAL/cgal/releases/download/releases%2FCGAL-4.8.1/CGAL-4.8.1.zip | bsdtar -xf- && cd CGAL-* \
   && mkdir build && cd build \
-  && cmake -D CMAKE_BUILD_TYPE=Release -D BUILD_SHARED_LIBS=ON -D CMAKE_INSTALL_PREFIX=/var/task -D CMAKE_INSTALL_LIBDIR=lib ../ \
+  && cmake -D CMAKE_BUILD_TYPE=Release -D BUILD_SHARED_LIBS=ON -D CMAKE_INSTALL_PREFIX=/var/task -D WITH_BLAS=ON -D WITH_LAPACK=ON -D WITH_GMPXX=ON ../ \
   && make install
 
 RUN set -x && cd /etc/yum.repos.d \
