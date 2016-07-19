@@ -29,7 +29,7 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && curl -L http://www.mpfr.org/mpfr-current/mpfr-3.1.4.tar.bz2 | tar -jxf - && cd mpfr-* \
   && curl http://www.mpfr.org/mpfr-3.1.4/allpatches | patch -N -Z -p1 \
-  && ./configure --prefix=/var/task \
+  && ./configure --prefix=/var/task --with-gmp=/var/task \
   && make -j2 \
   && make check && make install
 
