@@ -16,8 +16,8 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
 
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && curl -L http://downloads.sourceforge.net/project/boost/boost/1.61.0/boost_1_61_0.tar.bz2 | tar -jxf - && cd boost_* \
-  && ./bootstrap.sh \
-  && ./b2 install link=shared --prefix=/var/task --without-python -j2
+  && ./bootstrap.sh --prefix=/var/task \
+  && ./b2 install link=shared --without-python -j2 cxxflags="-std=c++11"
 
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && curl -L https://gmplib.org/download/gmp/gmp-6.1.1.tar.bz2 | tar -jxf - && cd gmp-* \
