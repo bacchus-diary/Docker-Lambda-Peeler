@@ -49,4 +49,4 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && make all && make install
 
 RUN rm -rf ~/tmp \
-  && echo "Build Complete: Version 1.2.1"
+  && echo "Build Complete: Version 1.3.0"
