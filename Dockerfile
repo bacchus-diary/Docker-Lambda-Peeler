@@ -15,6 +15,7 @@ RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
   && cp -vu ../levmar.h /var/task/include/
 
 RUN set -x && mkdir -pv ~/tmp && cd ~/tmp \
+  && yum update -y && yum install -y bzip2-devel \
   && curl -L http://downloads.sourceforge.net/project/boost/boost/1.61.0/boost_1_61_0.tar.bz2 | tar -jxf - && cd boost_* \
   && ./bootstrap.sh --prefix=/var/task \
   && ./b2 install link=shared --without-python -j2 cxxflags="-std=c++11"
